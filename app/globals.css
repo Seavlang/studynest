@@ -1,26 +1,53 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ink: #141a20;
+  --ink-soft: #3d4750;
+  --brand: #6b8aa6;
+  --glass: rgba(255, 255, 255, 0.55);
+  --glass-strong: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.75);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-brand: var(--brand);
+  --font-sans: var(--font-gabarito);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--ink);
+  font-family: var(--font-gabarito), system-ui, sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(160deg, #d3dbe3 0%, #e3e8ed 50%, #d6dee6 100%);
+  background-attachment: fixed;
+}
+
+/* Blurred colour blobs give the glass something to refract */
+.blobs { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.blobs i { position: absolute; border-radius: 9999px; filter: blur(70px); }
+.blobs i:nth-child(1) { width: 560px; height: 560px; left: 22%; top: 30%; background: #8fb0cf; opacity: 0.65; }
+.blobs i:nth-child(2) { width: 480px; height: 480px; right: 2%; top: 12%; background: #eef2f6; opacity: 0.7; }
+.blobs i:nth-child(3) { width: 600px; height: 600px; right: 14%; bottom: -14%; background: #7fa3c4; opacity: 0.5; }
+.blobs i:nth-child(4) { width: 420px; height: 420px; left: 6%; bottom: 4%; background: #e4eaf0; opacity: 0.7; }
+
+.glass {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.5));
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(22px) saturate(170%);
+  -webkit-backdrop-filter: blur(22px) saturate(170%);
+  box-shadow:
+    0 0 0 1px rgba(70, 100, 130, 0.22),
+    0 10px 32px rgba(50, 75, 100, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.glass-strong {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.35));
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  box-shadow: 0 0 0 1px rgba(70, 100, 130, 0.18), 0 4px 14px rgba(50, 75, 100, 0.1), inset 0 1px 0 #fff;
 }
